@@ -1,22 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+
 from PIL import Image
 
 def convert_png_to_ico(png_filename):
-    # Open the PNG file
     img = Image.open(png_filename)
-
-    # Standard sizes for ICO files
-    # These sizes are commonly used for icons in Windows applications
     sizes = [(16, 16), (32, 32), (48, 48), (64, 64), (128, 128), (256, 256)]
-
-    # Save the image as an ICO file with the specified sizes
-    # The ICO format can contain multiple images of different sizes
+    resized_images = [img.resize(size, Image.LANCZOS) for size in sizes]
     ico_filename = png_filename.replace('.png', '.ico')
     img.save(ico_filename, format='ICO', sizes=sizes)
-
-    print(f"File ICO saved as: {ico_filename}")
+    print(f"ICO file saved as: {ico_filename}")
 
 
 if __name__ == "__main__":
